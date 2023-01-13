@@ -1,7 +1,7 @@
 #ifndef ANY_H
 #define ANY_H
 
-enum ctype { TYPE_CHAR, TYPE_CHAR_POINTER, TYPE_INT };
+enum ctype { TYPE_CHAR, TYPE_CHAR_POINTER, TYPE_INT, TYPE_FLOAT };
 
 struct any {
   enum ctype type;
@@ -14,7 +14,7 @@ typedef struct any any_t;
   int _any_concat(is, name)(any_t * it) { return it->type == b; }
 
 #define typeof(t)                                                              \
-  _Generic((t), int : TYPE_INT, char : TYPE_CHAR, char * : TYPE_CHAR_POINTER)
+  _Generic((t), int : TYPE_INT, char : TYPE_CHAR, char * : TYPE_CHAR_POINTER, float : TYPE_FLOAT)
 
 #define anyify(a, t)                                                           \
   {                                                                            \
@@ -26,5 +26,6 @@ typedef struct any any_t;
 
 mkis(int, TYPE_INT);
 mkis(char, TYPE_CHAR);
-mkis(charp, TYPE_CHAR_POINTER);
+mkis(str, TYPE_CHAR_POINTER);
+mkis(float, TYPE_CHAR_POINTER);
 #endif /* ANY_H */
